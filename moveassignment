@@ -1,0 +1,46 @@
+
+#include <iostream>
+using namespace std;
+class A
+{
+    public:
+    int a;
+     int *p;
+     A()
+     {
+
+     }
+     A(int x)
+     {
+         a=x;
+         p=new int[a];
+        for(auto i=0;i<a;i++)
+        cin>>p[i];
+     }
+
+     A &operator =(A &&obj)
+     {
+         a=obj.a;
+         p=obj.p;
+         obj.a=0;
+         obj.p=nullptr;
+           return *this;
+     }
+     ~A()
+     {
+         delete[]p;
+     }
+     void display()
+     {
+         cout<<a<<endl;
+        for(auto i=0;i<a;i++)
+             cout<<p[i]<<endl;
+     }
+};
+int main()
+{
+    A obj(3),obj2;
+        obj2=move(obj);
+        obj2.display();
+  obj.display();
+}
