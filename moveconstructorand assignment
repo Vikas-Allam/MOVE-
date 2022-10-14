@@ -1,0 +1,44 @@
+
+#include <iostream>
+using namespace std;
+class A
+{
+    public:
+    int a;
+     A()
+     {
+
+     }
+     A(int x)
+     {
+         a=x;
+     }
+
+   A(A &&obj)
+   {
+
+       cout<<"move constructor is called"<<endl;
+       a=obj.a;
+       obj.a=0;
+
+   }
+     A &operator =(A &&obj)
+     {
+         cout<<"move assignment operator called"<<endl;
+         a=obj.a;
+         obj.a=0;
+         return *this;
+     }
+     ~A()
+     {
+             cout<<"destructed";
+     }
+};
+int main()
+{
+    A obj(3),obj2;
+       obj2=move(obj);//move asssignment
+       A obj3=move(obj2);//move constrcutor
+
+}
+
